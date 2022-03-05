@@ -125,6 +125,7 @@ class _JustAudioBackgroundPlugin extends JustAudioPlatform {
 
   @override
   Future<AudioPlayerPlatform> init(InitRequest request) async {
+    print('init(): ${request.id}');
     if (_player != null) {
       throw PlatformException(
           code: "error",
@@ -140,6 +141,7 @@ class _JustAudioBackgroundPlugin extends JustAudioPlatform {
   @override
   Future<DisposePlayerResponse> disposePlayer(
       DisposePlayerRequest request) async {
+    print('background disposePlayer(): ${_player?.id}');
     await _player?.release();
     _player = null;
     return DisposePlayerResponse();
@@ -148,6 +150,7 @@ class _JustAudioBackgroundPlugin extends JustAudioPlatform {
   @override
   Future<DisposeAllPlayersResponse> disposeAllPlayers(
       DisposeAllPlayersRequest request) async {
+    print('background disposeAllPlayers(): ${_player?.id}');
     await _player?.release();
     _player = null;
     return DisposeAllPlayersResponse();
@@ -195,6 +198,7 @@ class _JustAudioPlayer extends AudioPlayerPlatform {
   PlaybackState get playbackState => _audioHandler.playbackState.nvalue!;
 
   Future<void> release() async {
+    print('release()');
     eventController.close();
     await _audioHandler.stop();
   }

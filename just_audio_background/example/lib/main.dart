@@ -341,7 +341,7 @@ class ControlButtons extends StatelessWidget {
               return IconButton(
                 icon: Icon(Icons.pause),
                 iconSize: 64.0,
-                onPressed: player.pause,
+                onPressed: player.stop,
               );
             } else {
               return IconButton(
